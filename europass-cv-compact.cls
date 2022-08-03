@@ -127,7 +127,7 @@
 
 \LoadClass[\ecv@fontsize]{extarticle}
 \RequirePackage{ucs}
-\RequirePackage[utf8x]{inputenc}
+\RequirePackage[utf8]{inputenc}
 \RequirePackage{array}
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \RequirePackage{longtable}
@@ -439,10 +439,14 @@ $\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_github}\end{array}
 }
 {\end{longtable}}
 
-\newcommand{\ecvsection}[2][8pt]{%
-\tabularnewline
-\noindent\parbox[b]{\hsize}{\raggedleft\textcolor{torea-bay}{\MakeTextUppercase{#2}}}\vspace{#1} & \color{boston-blue}\hrulefill\vspace{#1}\tabularnewline\nopagebreak}
 
+\renewcommand{\section}[2][8pt]{%
+    \tabularnewline
+    \noindent\parbox[b]{\hsize}{\raggedleft\textcolor{torea-bay}{\MakeTextUppercase{#2}}}\vspace{#1} & \color{boston-blue}\hrulefill\vspace{#1}\tabularnewline\nopagebreak
+}
+
+% Alias for backwards compatibility
+\let\ecvsection\section
 
 \newcommand{\ecvposition}[2]{%
  \ecvitem{\MakeTextUppercase{#1}}{\LARGE #2}

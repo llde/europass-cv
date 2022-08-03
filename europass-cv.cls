@@ -27,7 +27,7 @@
 % CV models and instructions:
 %   http://europass.cedefop.europa.eu/en/documents/curriculum-vitae/templates-instructions
 
-\DeclareRobustCommand\ecv@utf[1]{{\inputencoding{utf8x}#1}}
+\DeclareRobustCommand\ecv@utf[1]{{\inputencoding{utf8}#1}}
 
 % Set language
 \DeclareOption{english}{%
@@ -100,7 +100,7 @@
 % Europass logo
 \DeclareOption{logo}{%
 \providecommand*\draweuropasslogo{%
-   \raisebox{-4mm}{\includegraphics[width=\ecv@logowidth]{europasslogo}}}
+   \raisebox{-15mm}{\includegraphics[width=\ecv@logowidth]{europass2}}}
 }
 \DeclareOption{nologo}{\renewcommand*\draweuropasslogo{}}
 
@@ -127,13 +127,13 @@
 
 \LoadClass[\ecv@fontsize]{extarticle}
 \RequirePackage{ucs}
-\RequirePackage[utf8x]{inputenc}
+\RequirePackage[utf8]{inputenc}
 \RequirePackage{array}
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \RequirePackage{longtable}
 \RequirePackage{fancyhdr} % for page numbering
 \RequirePackage[overload]{textcase}
-%%\RequirePackage[bookmarks=false,colorlinks=true,urlcolor=navyblue]{hyperref}
+\RequirePackage[bookmarks=false,colorlinks=true,urlcolor=navyblue]{hyperref}
 \RequirePackage{amssymb} % for $\blacksquare$ symbol
 \RequirePackage{enumitem} % for removing item indentation
 
@@ -193,7 +193,7 @@
 \newcommand*{\ecvfootername}[1]{\def\ecv@footername{#1}}
 \newcommand*{\ecvaddress}[1]{\def\ecv@address{#1}}
 \newcommand*{\ecvtelephone}[2][]{\def\ecv@mobile{#2}\def\ecv@telephone{#1}}
-\newcommand*{\ecvemail}[2][]{\def\ecv@emailid{#2}\def\ecv@emailtext{#1}}
+\newcommand*{\ecvemail}[1]{\def\ecv@email{#1}}
 \newcommand*{\ecvlinkedin}[1]{\def\ecv@linkedin{#1}}
 \newcommand*{\ecvgithub}[1]{\def\ecv@github{#1}}
 \newcommand*{\ecvstackoverflow}[1]{\def\ecv@stackoverflow{#1}}
@@ -201,6 +201,7 @@
 \newcommand*{\ecvnationality}[1]{\def\ecv@nationality{#1}}
 \newcommand*{\ecvdateofbirth}[1]{\def\ecv@birth{#1}}
 \newcommand*{\ecvgender}[1]{\def\ecv@gender{#1}}
+
 % Personal picture
 \newcommand*{\ecvdrawpicture}{}
 \newcommand*{\ecvbeforepicture}[1]{\def\ecv@beforepic{#1}}
@@ -234,7 +235,7 @@
 \ecvpicture{}
 
 \providecommand{\ecvpersonalinfo}[1][20pt]{%
-& \tabularnewline[20pt]
+%& \tabularnewline[20pt] Remove the space.
 \textcolor{torea-bay}{\MakeUppercase{\ecv@infosectionkey}} & \LARGE\ecv@name\tabularnewline[10pt]
 \ifx\@empty\ecvdrawpicture &\else
 \ecv@beforepic\ecvdrawpicture\ecv@afterpic &
@@ -247,14 +248,9 @@ $\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_mobile}\end{array}
  \ifx\@empty\ecv@telephone\else\qquad\includegraphics[width=\ecv@iconwidth]{ic_phone_home} \ecv@telephone\fi
 \par\vspace{5pt}
 \fi
-\ifx\@empty\ecv@emailid\else
+\ifx\@empty\ecv@email\else
 	$\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_email}\end{array}$%
-	\ifx\@empty\ecv@emailtext%
-		\href{mailto:\ecv@emailid}{\foreignlanguage{english}{\ecv@emailid}}
-	\else%
-		\href{mailto:\ecv@emailid}{\ecv@emailtext}
-	\fi
-	\par\vspace{5pt}
+    \href{mailto:\ecv@email}{\ecv@email}\par\vspace{5pt}
 \fi
 \ifx\@empty\ecv@homepage\else
 $\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_url}\end{array}$\ecv@homepage\par\vspace{5pt}
@@ -263,7 +259,7 @@ $\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_url}\end{array}$\e
 $\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_linkedin}\end{array}$\ecv@linkedin\par\vspace{5pt}
 \fi
 \ifx\@empty\ecv@github\else
-$\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_github}\end{array}$\ecv@github\par\vspace{5pt}
+$\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_github}\end{array}$\href{https://\ecv@github}{\ecv@github}\par\vspace{5pt}
 \fi
 \ifx\@empty\ecv@stackoverflow\else
 $\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_stackoverflow}\end{array}$\ecv@stackoverflow\par\vspace{10pt}
@@ -444,10 +440,18 @@ $\begin{array}{@{}l}\includegraphics[width=\ecv@iconwidth]{ic_stackoverflow}\end
 }
 {\end{longtable}}
 
-\newcommand{\ecvsection}[2][10pt]{%
-\tabularnewline
-\noindent\parbox[b]{\hsize}{\raggedleft\textcolor{torea-bay}{\MakeTextUppercase{#2}}}\vspace{#1} & \color{boston-blue}\hrulefill\vspace{#1}\tabularnewline\nopagebreak}
+%\newcommand{\ecvsection}[2][10pt]{%
+%\tabularnewline
+%\noindent\parbox[b]{\hsize}{\raggedleft\textcolor{torea-bay}{\MakeTextUppercase{#2}}}\vspace{#1} & \color{boston-blue}\hrulefill\vspace{#1}\tabularnewline\nopagebreak}
 
+\renewcommand{\section}[2][10pt]{%
+    \tabularnewline
+    \noindent\parbox[b]{\hsize}{\raggedleft\textcolor{torea-bay}{\MakeTextUppercase{#2}}}\vspace{#1} & \color{boston-blue}\hrulefill\vspace{#1}\tabularnewline\nopagebreak
+%  {\large{\par\textbf{#2}}}\vspace{#1} & \tabularnewline\nopagebreak
+}
+
+% Alias for backwards compatibility
+\let\ecvsection\section
 
 \newcommand{\ecvposition}[2]{%
  \ecvitem{\MakeTextUppercase{#1}}{\LARGE #2}
