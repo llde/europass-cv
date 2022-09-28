@@ -22,7 +22,7 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{europass-cv}[2017/11/14 (beta) European curriculum vitae class]
+\ProvidesClass{europass-cv2}[2017/11/14 (beta) European curriculum vitae class]
 
 % CV models and instructions:
 %   http://europass.cedefop.europa.eu/en/documents/curriculum-vitae/templates-instructions
